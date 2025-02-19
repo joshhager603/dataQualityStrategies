@@ -38,6 +38,10 @@ def load_clean_data(df: pd.DataFrame):
         df.to_sql(CLEAN_DATA_TABLE_NAME, engine, if_exists="replace", index=False)
 
         print("Clean data has been inserted into the clean data table!")
-        
+
+        # create a .csv file with our clean data
+        df.to_csv(CLEAN_DATA_FILEPATH, index=False)
+        print(f"Clean data has been saved to {CLEAN_DATA_FILEPATH}")
+
     except psycopg2.Error as e:
         print("An error occurred:", e)
