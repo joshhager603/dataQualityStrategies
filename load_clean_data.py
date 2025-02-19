@@ -31,7 +31,7 @@ def load_clean_data(df: pd.DataFrame):
         );
         '''
         cursor.execute(create_table_statement)
-        print(f"Table {RAW_DATA_TABLE_NAME} is created.")
+        print(f"Table {CLEAN_DATA_TABLE_NAME} is created.")
 
         # insert our clean data into the table
         engine = common_functions.create_sqlalchemy_engine()
