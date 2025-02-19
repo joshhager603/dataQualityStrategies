@@ -27,7 +27,7 @@ def manual_column_correct(df: pd.DataFrame, column_name: str, group: list[str]):
         if new_value:
             df.at[index, column_name] = new_value
     
-    print(f"All entries in{column_name} have been checked for conformity to group.")
+    print(f"All entries in {column_name} have been checked for conformity to group.")
 
 def clean_data() -> pd.DataFrame:
 
