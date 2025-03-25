@@ -10,7 +10,47 @@ COUNTRY_GROUP = ['Drivania', 'Glarastan', 'Xanthoria', 'Velronia', 'Mordalia',
                  'Vorastria', 'Luronia', 'Tavlora', 'Zorathia', 'Hesperia']
 
 PERFORMANCE_RATING_GROUP = ['Average Performers', 'High Performers', 
-                            'Low Performers', 'Top Performers', 'Poor Performers'] 
+                            'Low Performers', 'Top Performers', 'Poor Performers']
+
+DEPARTMENT_GROUP = ['Marketing', 'R&D', 'Legal', 'HR', 'IT', 'Operations', 
+                    'Sales', 'Customer Support', 'Finance', 'Logistics']
+
+DEPARTMENT_CORRECTIONS = {
+    'Cust Support': 'Customer Support',
+    'H R': 'HR',
+    'Fin': 'Finance',
+    'sales': 'Sales',
+    'Hr': 'HR',
+    'RnD': 'R&D',
+    'It': 'IT',
+    'logistics': 'Logistics',
+    'customer support': 'Customer Support',
+    'Finanace': 'Finance',
+    'Research': 'R&D',
+    'Marketng': 'Marketing',
+    'Support': 'Customer Support',
+    'it': 'IT',
+    'CustomerSupport': 'Customer Support',
+    'r&d': 'R&D',
+    'Human Resources': 'HR',
+    'Lgistics': 'Logistics',
+    'finance': 'Finance',
+    'Slaes': 'Sales',
+    'Oprations': 'Operations',
+    'Marketng': 'Marketing',
+    'operations': 'Operations',
+    'Legl': 'Legal',
+    'Logstics': 'Logistics',
+}
+
+COUNTRY_CORRECTIONS = { 
+    'Xanth0ria': 'Xanthoria'
+}
+
+PERFORMANCE_RATING_CORRECTIONS = { 
+    'Top Performers': 'High Performers',
+    'Poor Performers': 'Low Performers'
+}
 
 def manual_column_correct(df: pd.DataFrame, column_name: str, group: list[str]):
     print(f'\n ----- Manual column correct for column {column_name} -----')
@@ -46,12 +86,16 @@ def clean_data() -> pd.DataFrame:
     df['Date of Joining'] = df['Date of Joining'].dt.strftime('%Y-%m-%d')
 
     # 4. Fix non-compliant entries in Department column
+    df['Department'] = df['Department'].replace(DEPARTMENT_CORRECTIONS)
     manual_column_correct(df, 'Department', DEPARTMENT_GROUP)
 
     # 5. Fix non-compliant entries in Country column
+    df['Country'] = df['Country'].str.capitalize()
+    df['Country'] = df['Country'].replace(COUNTRY_CORRECTIONS)
     manual_column_correct(df, 'Country', COUNTRY_GROUP)
 
     # 6. Fix non-compliant entries in Performance Rating column
+    df['Performance Rating'] = df['Performance Rating'].replace(DEPARTMENT_CORRECTIONS)
     manual_column_correct(df, 'Performance Rating', PERFORMANCE_RATING_GROUP)
 
     # 7. confirm all types are correct
